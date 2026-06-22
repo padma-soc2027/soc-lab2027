@@ -1,0 +1,30 @@
+## Day 3: SSH Brute Force Detection
+**Date**: 2026-06-22
+**Location**: Chennai, India
+**MITRE ATT&CK**: T1110.001 Password Guessing
+**Tactic**: Credential Access
+**Tool**: Hydra 9.5
+**Victim**: 192.168.157.133 Debian trixie
+**Command**: hydra -l root -P pass.txt ssh://127.0.0.1
+
+**Evidence**:
+## Day 3: SSH Brute Force Detection
+**Date**: 2026-06-22
+**Location**: Chennai, India
+**MITRE ATT&CK**: T1110.001 Password Guessing
+**Tactic**: Credential Access
+**Tool**: Hydra 9.5
+**Victim**: 192.168.157.133 Debian trixie
+**Command**: hydra -l root -P pass.txt ssh://127.0.0.1
+
+**Evidence**:
+PASTE YOUR 3 JOURNALCTL LINES HERE
+sudo journalctl -u ssh --since "10 minutes ago" | grep 'Failed password' | tail -3
+
+**Analyst Note**: Multiple failed SSH authentication attempts from localhost in 2-second window indicates automated password guessing attack consistent with T1110.001.
+
+**Recommendation**: 
+1. Disable root SSH login
+2. Implement fail2ban with 3-attempt ban
+3. Use SSH key-based authentication only
+4. Alert on >5 Failed password events in 60 seconds
